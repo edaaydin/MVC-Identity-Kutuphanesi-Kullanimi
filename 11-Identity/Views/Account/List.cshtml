@@ -1,0 +1,45 @@
+﻿@model List<AppUser>
+
+@if (TempData["mesaj"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["mesaj"]
+    </div>
+}
+<p>
+    <a asp-action="Register" class="btn btn-success">Yeni Kullanıcı Ekle</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>UserName</th>
+            <th>Mail</th>
+            <th>Update</th>
+            <th>Delete</th>
+            <th>Assign Role</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelitem => item.Id)</td>
+                <td>@Html.DisplayFor(modelitem => item.UserName)</td>
+                <td>@Html.DisplayFor(modelitem => item.Email)</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">Update</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+                <td>
+                    <a asp-action="Assign" asp-controller="Role" asp-route-id="@item.Id" class="btn btn-info">Assign Role</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
